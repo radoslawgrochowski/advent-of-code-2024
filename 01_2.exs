@@ -10,12 +10,22 @@ content =
 
 IO.inspect(content, label: "content")
 
-distance =
+[left, right] =
   content
   |> Enum.zip()
-  |> Enum.map(fn tuple -> Tuple.to_list(tuple) |> Enum.sort() |> Enum.to_list() end)
-  |> Enum.zip()
-  |> Enum.map(fn {left, right} -> abs(left - right) end)
-  |> Enum.sum()
+  |> Enum.map(&Tuple.to_list/1)
 
-IO.write(distance)
+IO.inspect(left)
+IO.inspect(right)
+
+similarity =
+  left
+  |> Enum.map(fn number ->
+    occurences =
+      right
+      |> Enum.count(fn value -> number == value end)
+    number * occurences
+  end)
+  |> Enum.sum
+
+IO.inspect(similarity)
