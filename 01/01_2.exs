@@ -24,8 +24,9 @@ similarity =
     occurences =
       right
       |> Enum.count(fn value -> number == value end)
+
     number * occurences
   end)
-  |> Enum.sum
+  |> Enum.sum()
 
 IO.inspect(similarity)
